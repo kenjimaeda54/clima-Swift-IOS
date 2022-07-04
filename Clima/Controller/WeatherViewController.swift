@@ -16,8 +16,11 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var searchTextInput: UITextField!
     
+    let weatherManager = WeatherManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        //isto e importante para searchTextInput ser a referencia do delegate
         searchTextInput.delegate = self
     }
     
@@ -49,6 +52,9 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
     //metodo disponivel no UITextFieldDelegate
     //esse metodo e chamado quando finaliza a edicao
     func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField.text != "" {
+            weatherManager.getUrl(cityName: textField.text!)
+        } 
         searchTextInput.text = ""
     }
     
